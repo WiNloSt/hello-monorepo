@@ -90,6 +90,8 @@ workflows:
           filters:
             tags:
               only: a
+            branches:
+              ignore: /.*/
 
       - a_deploy:
           requires:
