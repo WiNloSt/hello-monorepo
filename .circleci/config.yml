@@ -27,6 +27,6 @@ workflows:
   service_a:
     jobs:
       - _build
-      - deploy
+      - deploy:
           requires:
             - _build
