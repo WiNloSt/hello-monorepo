@@ -3,30 +3,80 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 base: &base
+  working_directory: ~/hello-monorepo
   docker:
     - image: circleci/node:8.4.0
 
 version: 2
 jobs:
-  _build:
+  a_build:
     <<: *base
     steps:
-      - run:
-          name: 'test 1'
-          command: echo test
+      - checkout
 
-  deploy:
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - a
+
+  a_test:
+    <<: *base
+    steps:
+      - attach_workspace:
+          at: a
+
+      - run:
+          name: 'test a'
+          command: yarn test
+
+  a_tag:
+    <<: *base
+    steps:
+      - add_ssh_keys
+
+      - run:
+          name: 'tag a'
+          command: |
+            git tag a
+            git push --tags
+
+  a_deploy:
     <<: *base
     steps:
       - run:
-          name: 'test 2'
-          command: echo test
+          name: 'deploy a'
+          command: git push "https://'':${API_TOKEN}@git.heroku.com/monorepo-a.git" HEAD:master
 
 workflows:
   version: 2
+  main:
+    jobs:
+      - a_build
+      - a_test:
+          requires:
+            - a_build
+      - a_tag:
+          requires:
+            - a_test
   service_a:
     jobs:
-      - _build
-      - deploy:
-          requires:
-            - _build
+      - a_deploy:
+          type: approval
+          filters:
+            tags:
+              only: a
+

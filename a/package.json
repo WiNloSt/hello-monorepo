@@ -7,7 +7,8 @@
     "express": "^4.15.4"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo pass!!!"
   },
   "engines": {
     "node": "8.4.0",
