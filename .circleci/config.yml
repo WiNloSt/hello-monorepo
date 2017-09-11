@@ -10,7 +10,7 @@ version: 2
 jobs:
   _build:
     <<: *base
-   steps:
+    steps:
       - run:
         name: 'test 1'
         command: echo test
