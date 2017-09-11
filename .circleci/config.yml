@@ -12,15 +12,15 @@ jobs:
     <<: *base
     steps:
       - run:
-        name: 'test 1'
-        command: echo test
+          name: 'test 1'
+          command: echo test
 
   deploy:
     <<: *base
     steps:
       - run:
-        name: 'test 2'
-        command: echo test
+          name: 'test 2'
+          command: echo test
 
 workflows:
   version: 2
