@@ -28,5 +28,5 @@ workflows:
     jobs:
       - _build
       - deploy
-        requires:
-          - _build
+          requires:
+            - _build
