@@ -61,6 +61,10 @@ jobs:
   a_deploy:
     <<: *base
     steps:
+      - checkout
+
+      - add_ssh_keys
+
       - run:
           name: 'deploy a'
           command: git push "https://'':${API_TOKEN}@git.heroku.com/monorepo-a.git" HEAD:master
