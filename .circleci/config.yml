@@ -83,6 +83,7 @@ workflows:
   service_a:
     jobs:
       - a_deploy:
+          type: approval
           filters:
             tags:
               only: a
