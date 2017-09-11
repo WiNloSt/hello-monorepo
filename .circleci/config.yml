@@ -48,6 +48,9 @@ jobs:
   a_tag:
     <<: *base
     steps:
+      - attach_workspace:
+          at: .
+
       - add_ssh_keys
 
       - run:
