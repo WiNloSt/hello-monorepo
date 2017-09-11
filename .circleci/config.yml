@@ -55,8 +55,8 @@ jobs:
       - run:
           name: 'tag a'
           command: |
-            git tag a
-            git push --tags
+            git tag a -f
+            git push --tags -f
 
   a_deploy:
     <<: *base
