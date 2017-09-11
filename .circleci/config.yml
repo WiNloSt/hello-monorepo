@@ -92,7 +92,6 @@ workflows:
               only: a
             branches:
               ignore: /.*/
-
       - a_deploy:
           requires:
             - a_hold
