@@ -41,7 +41,9 @@ jobs:
 
       - run:
           name: 'test a'
-          command: yarn test
+          command: |
+            cd a
+            yarn test
 
   a_tag:
     <<: *base
