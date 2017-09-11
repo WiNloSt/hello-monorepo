@@ -1,0 +1,29 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+base_config: &base
+  docker:
+    - image: circleci/node:8.4.0
+version: 2
+jobs:
+  _build:
+    <<: *base
+   steps:
+      - run:
+        name: 'test 1'
+        command: echo test
+
+  deploy:
+    <<: *base
+    steps:
+      - run:
+        name: 'test 2'
+        command: echo test
+
+workflows:
+  version: 2
+  service_a:
+    jobs:
+      - _build
+      - deploy
