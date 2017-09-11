@@ -87,6 +87,12 @@ workflows:
     jobs:
       - a_hold:
           type: approval
+          filters:
+            tags:
+              only: a
+            branches:
+              only: master
+
       - a_deploy:
           requires:
             - a_hold
