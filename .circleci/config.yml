@@ -80,6 +80,9 @@ workflows:
       - a_tag:
           requires:
             - a_test
+          filters:
+            branches:
+              only: master
   service_a:
     jobs:
       - a_hold:
@@ -87,6 +90,8 @@ workflows:
           filters:
             tags:
               only: a
+            branches:
+              ignore: /.*/
 
       - a_deploy:
           requires:
