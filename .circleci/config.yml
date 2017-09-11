@@ -37,7 +37,7 @@ jobs:
     <<: *base
     steps:
       - attach_workspace:
-          at: a
+          at: .
 
       - run:
           name: 'test a'
