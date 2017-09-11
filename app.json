@@ -1,0 +1,23 @@
+{
+  "name": "hello-monorepo",
+  "scripts": {
+  },
+  "env": {
+    "APP_BASE": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/lstoll/heroku-buildpack-monorepo"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
