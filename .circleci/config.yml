@@ -82,9 +82,13 @@ workflows:
             - a_test
   service_a:
     jobs:
-      - a_deploy:
+      - a_hold:
           type: approval
           filters:
             tags:
               only: a
+
+      - a_deploy:
+          requires:
+            - a_hold
 
