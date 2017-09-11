@@ -91,9 +91,14 @@ workflows:
             tags:
               only: a
             branches:
-              only: master
+              ignore: /.*/
 
       - a_deploy:
           requires:
             - a_hold
+          filters:
+            tags:
+              only: a
+            branches:
+              ignore: /.*/
 
